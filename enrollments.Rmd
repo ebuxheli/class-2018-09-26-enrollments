@@ -25,7 +25,6 @@ y <- x %>%
   select(course_department, course_title, course_name, c_length, u_grad) %>% 
   arrange(c_length) %>% 
   slice(1:7)
-  
 
 y %>% kable(caption = "Enrollment Name")
 ```
