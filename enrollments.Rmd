@@ -2,7 +2,8 @@
 title: "Enrollments"
 author: "Enxhi Buxheli"
 date: "9/26/2018"
-output: pdf_document
+output: 
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -17,10 +18,15 @@ library(knitr)
 x <- read_rds("enrollment.rds") %>% 
   select(course_department, course_title, course_name, u_grad) %>% 
   filter(!is.na(course_name)) %>% 
-  arrange(desc(u_grad)) %>% 
-  slice(1:10)
+  arrange(desc(u_grad))
+
+y <- x %>% 
+  mutate(c_length = nchar(course_name)) %>%
+  select(course_department, course_title, course_name, c_length, u_grad) %>% 
+  arrange(c_length) %>% 
+  slice(1:7)
   
 
-x %>% kable(caption = "Enrollments")
+y %>% kable(caption = "Enrollment Name")
 ```
 
